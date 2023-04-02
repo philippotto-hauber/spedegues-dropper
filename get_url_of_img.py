@@ -6,7 +6,7 @@ url_base = 'https://www.arthur-conan-doyle.com/'
 url_story = 'index.php/The_Story_of_Spedegue%27s_Dropper'
 url = url_base + url_story
 
-# get all the links to the images from story's main website
+# get all the links to the images (i.e. files ending in .jpg) from story's main website
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")  
 lst_links = []
@@ -19,7 +19,7 @@ for link in soup.find_all('a'):
 				lst_links_jpg.append(url_base + link.get('href'))
 
 # the links obtained above end in .jpg but do not actually lead to the images
-# this requires another iteration , now filtering on the word images in the url
+# this requires another iteration, now filtering on the word images in the url
 lst_links_jpg_2 = []
 for link in lst_links_jpg:
 	response = requests.get(link)
